@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const { v4: uuidv4 } = require('uuid'); 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -29,17 +30,35 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
-  // Logic to add a new note to db.json
-  // You'll need to give each note a unique id
-  // Then, write the updated notes array back to db.json
-  // Finally, send the new note as a response
+  const notes = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+
+  // Generate a unique id using uuid
+  newNote.id = uuidv4();
+
+  notes.push(newNote);
+
+  fs.writeFileSync('db.json', JSON.stringify(notes));
+  res.json(newNote);
 });
 
-// Additional API route for bonus (DELETE)
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = req.params.id;
-  // Logic to delete a note from db.json based on the id
-  // Then, send a response indicating success or failure
+  let notes = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+
+  // Find the index of the note with the given id
+  const noteIndex = notes.findIndex(note => note.id === noteId);
+
+  if (noteIndex !== -1) {
+    // Remove the note from the array
+    notes.splice(noteIndex, 1);
+
+    // Write the updated notes array back to db.json
+    fs.writeFileSync('db.json', JSON.stringify(notes));
+
+    res.json({ success: true });
+  } else {
+    res.status(404).json({ success: false, error: 'Note not found' });
+  }
 });
 
 // Start the server
