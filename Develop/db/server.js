@@ -24,26 +24,26 @@ app.get('*', (req, res) => {
 
 // API Routes
 app.get('/api/notes', (req, res) => {
-  const notes = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+  const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf8'));
   res.json(notes);
 });
 
 app.post('/api/notes', (req, res) => {
   const newNote = req.body;
-  const notes = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+  const notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf8'));
 
   // Generate a unique id using uuid
   newNote.id = uuidv4();
 
   notes.push(newNote);
 
-  fs.writeFileSync('db.json', JSON.stringify(notes));
+  fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
   res.json(newNote);
 });
 
 app.delete('/api/notes/:id', (req, res) => {
   const noteId = req.params.id;
-  let notes = JSON.parse(fs.readFileSync('db.json', 'utf8'));
+  let notes = JSON.parse(fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf8'));
 
   // Find the index of the note with the given id
   const noteIndex = notes.findIndex(note => note.id === noteId);
@@ -53,7 +53,7 @@ app.delete('/api/notes/:id', (req, res) => {
     notes.splice(noteIndex, 1);
 
     // Write the updated notes array back to db.json
-    fs.writeFileSync('db.json', JSON.stringify(notes));
+    fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
 
     res.json({ success: true });
   } else {

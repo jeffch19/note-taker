@@ -1,13 +1,10 @@
 [
     {
+      "id": "1",
       "name": "Note Title",
       "text": "Note Content",
       "author": "Author Name"
-    },
-    {
-      "name": "Another Note",
-      "text": "Content of another note.",
-      "author": "Another Author"
     }
+  
   ]
   
