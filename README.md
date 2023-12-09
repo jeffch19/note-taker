@@ -15,7 +15,7 @@ What are the steps required to install your project? Provide a step-by-step desc
 
 Deployed Page: https://jeffch19.github.io/note-taker/ 
 
-Heroku Link: 
+Heroku Link: https://vast-plateau-02447-ae4e894a08e0.herokuapp.com/ 
 
 ![alt text](./11-express-homework-demo.gif)
 
