@@ -1,10 +1,1 @@
-[
-    {
-      "id": "1",
-      "name": "Note Title",
-      "text": "Note Content",
-      "author": "Author Name"
-    }
-  
-  ]
-  
+[{"id":"1","name":"Note Title","text":"Note Content","author":"Author Name"},{"title":"note 1","text":"text","id":"3546ffd3-171c-4a03-bfdb-b9a6084384e7"},{"title":"notes","text":"notes","id":"243e0be9-94d8-4ac2-ab73-73ab45034a42"},{"title":"notes","text":"text\n","id":"7d5edd7c-a543-4848-a9f7-70f91218f084"}]
